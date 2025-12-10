@@ -1,7 +1,7 @@
 ---
 title: 'The Yin and Yang of the Web: Client-Side vs. Server-Side'
 date: '2025-12-10'
-tags: ['Web Development','Architecture','Beginner Guide']
+tags: ['Web Development','Beginner Guide']
 
 ---
 If you are new to web development, you will immediately run into two terms that define how the internet works: **Client-Side** and **Server-Side**. Understanding the distinction between these two is the first step in understanding how modern applications are built.
