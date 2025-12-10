@@ -14,9 +14,9 @@ export default function Hero() {
                     </p>
                     <Link
                         href="#latest-posts"
-                        className="inline-block bg-black text-white px-8 py-3 text-sm font-semibold tracking-widest uppercase hover:bg-gray-800 transition-colors"
+                        className="inline-block bg-black !text-white px-8 py-3 text-sm font-semibold tracking-widest uppercase hover:bg-gray-800 transition-colors"
                     >
-                        Explore the Architecture
+                        View the content
                     </Link>
                 </div>
                 <div className="relative aspect-[21/9] w-full overflow-hidden bg-gray-100">
