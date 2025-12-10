@@ -1,5 +1,5 @@
 ---
-title:What Happens When You Click? The HTTP Request-Response Cycle Explained
+title: What Happens When You Click? The HTTP Request-Response Cycle Explained
 date: 2025-12-10
 tags: [Web Development,Networking,Beginner]
 
