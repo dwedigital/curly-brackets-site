@@ -17,7 +17,7 @@ export default function FeatureGrid() {
             <div className="container mx-auto px-4">
                 <div className="max-w-3xl mx-auto text-center mb-16">
                     <h2 className="text-3xl font-bold tracking-tight">
-                        Exploring the cutting edge of technology, from neural networks to distributed systems.
+                        Exploring technology, from neural networks to distributed systems.
                     </h2>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
