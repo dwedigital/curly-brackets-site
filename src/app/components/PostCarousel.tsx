@@ -41,7 +41,7 @@ export default function PostCarousel({ posts }: PostCarouselProps) {
                 {posts.map((post) => (
                     <div key={post.id} className="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-start">
                         <Link href={`/blog/${post.id}`} className="block group/card h-full flex flex-col">
-                            <div className="relative aspect-[16/9] bg-gray-100 mb-4 overflow-hidden">
+                            <div className="relative h-64 w-full bg-gray-100 mb-4 overflow-hidden">
                                 {post.image ? (
                                     <Image
                                         src={post.image}
