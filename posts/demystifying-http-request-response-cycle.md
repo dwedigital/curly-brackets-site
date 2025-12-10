@@ -1,7 +1,7 @@
 ---
-title:Demystifying the HTTP Request-Response Cycle
-date: 2025-12-10
-tags: [Web Development,HTTP,Beginner]
+title: 'Demystifying the HTTP Request-Response Cycle'
+date: '2025-12-10'
+tags: ['Web Development','HTTP','Beginner']
 
 ---
 
