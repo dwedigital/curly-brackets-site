@@ -39,7 +39,7 @@ export default function PostCarousel({ posts }: PostCarouselProps) {
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {posts.map((post) => (
-                    <div key={post.id} className="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-start">
+                    <div key={post.id} className="w-[85vw] md:w-[384px] shrink-0 snap-start">
                         <Link href={`/blog/${post.id}`} className="block group/card h-full flex flex-col">
                             <div className="relative h-64 w-full bg-gray-100 mb-4 overflow-hidden">
                                 {post.image ? (

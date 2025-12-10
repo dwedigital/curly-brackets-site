@@ -28,7 +28,7 @@ export default function Header() {
                             </Link>
                         </li>
                         <li>
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">
+                            <a href="https://github.com/dwedigital/curly-brackets-site" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">
                                 GitHub
                             </a>
                         </li>
