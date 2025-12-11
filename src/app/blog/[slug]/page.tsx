@@ -1,7 +1,8 @@
-import { getAllPostIds, getPostData } from '@/lib/markdown';
+import { getAllPostIds, getPostData, getAdjacentPosts } from '@/lib/markdown';
 import Header from '@/app/components/Header';
 import { Metadata } from 'next';
 import Footer from '@/app/components/Footer';
+import PostNavigation from '@/app/components/PostNavigation';
 import Image from 'next/image';
 
 export async function generateStaticParams() {
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const postData = await getPostData(slug);
+    const adjacentPosts = getAdjacentPosts(slug);
 
     return (
         <div className="min-h-screen flex flex-col bg-white text-black">
@@ -67,6 +69,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
                         dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }}
                     />
                 </article>
+                <PostNavigation previous={adjacentPosts.previous} next={adjacentPosts.next} />
             </main>
             <Footer />
         </div>
