@@ -24,7 +24,7 @@ export default function FilteredPosts({ posts }: FilteredPostsProps) {
         <section id="latest-posts" className="mb-24">
             <div className="container mx-auto px-4">
                 <div className="mb-12 text-center">
-                    <h2 className="text-3xl font-bold tracking-tight mb-8">Generated Output</h2>
+                    <h2 className="text-3xl font-bold tracking-tight mb-8">Articles</h2>
                     <TagFilter
                         tags={allTags}
                         selectedTag={selectedTag}
