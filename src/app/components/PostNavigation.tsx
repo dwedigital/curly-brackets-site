@@ -14,12 +14,12 @@ export default function PostNavigation({ previous, next }: PostNavigationProps) 
     return (
         <nav className="w-full border-t border-gray-200 py-8">
             <div className="container mx-auto px-4">
-                <div className="flex justify-between items-stretch gap-4">
-                    {/* Previous Post - Aligned to Left */}
-                    {previous ? (
+                <div className="flex flex-col md:flex-row justify-between items-stretch gap-4">
+                    {/* Previous Post - Aligned to Left on desktop, Top on mobile */}
+                    {previous && (
                         <Link
                             href={`/blog/${previous.id}`}
-                            className="flex items-center bg-black text-white px-6 py-4 group hover:bg-gray-800 transition-colors duration-300 max-w-md"
+                            className="flex items-center bg-black text-white px-6 py-4 group hover:bg-gray-800 transition-colors duration-300 w-full md:max-w-md md:w-auto"
                         >
                             <div className="flex items-center gap-4">
                                 {/* Left Arrow */}
@@ -46,15 +46,14 @@ export default function PostNavigation({ previous, next }: PostNavigationProps) 
                                 </div>
                             </div>
                         </Link>
-                    ) : (
-                        <div className="flex-1"></div>
                     )}
 
-                    {/* Next Post - Aligned to Right */}
-                    {next ? (
+
+                    {/* Next Post - Aligned to Right on desktop, Bottom on mobile */}
+                    {next && (
                         <Link
                             href={`/blog/${next.id}`}
-                            className="flex items-center bg-black text-white px-6 py-4 group hover:bg-gray-800 transition-colors duration-300 max-w-md ml-auto"
+                            className="flex items-center bg-black text-white px-6 py-4 group hover:bg-gray-800 transition-colors duration-300 w-full md:max-w-md md:w-auto md:ml-auto"
                         >
                             <div className="flex items-center gap-4">
                                 <div className="flex flex-col text-right">
@@ -81,8 +80,6 @@ export default function PostNavigation({ previous, next }: PostNavigationProps) 
                                 </svg>
                             </div>
                         </Link>
-                    ) : (
-                        <div className="flex-1"></div>
                     )}
                 </div>
             </div>
