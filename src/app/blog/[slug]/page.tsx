@@ -65,7 +65,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
                     {!postData.image && <div className="w-full h-px bg-gray-200 mb-16"></div>}
 
                     <div
-                        className="prose prose-xl prose-neutral mx-auto prose-headings:font-bold prose-headings:tracking-tight prose-a:text-black prose-a:underline prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:bg-black hover:prose-a:text-white hover:prose-a:no-underline transition-colors"
+                        className="prose prose-xl prose-neutral mx-auto prose-headings:font-bold prose-headings:tracking-tight prose-a:bg-black prose-a:text-white prose-a:px-1 prose-a:py-0.5 prose-a:no-underline hover:prose-a:bg-gray-800 transition-colors"
                         dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }}
                     />
                 </article>
