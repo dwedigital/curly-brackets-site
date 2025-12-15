@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center mb-16">
                     <Link href="/" className="flex items-center gap-4 mb-8 md:mb-0">
                         <Image
-                            src="/images/logo.png"
+                            src="/images/logo.webp"
                             alt="Curly Brackets Logo"
                             width={40}
                             height={40}

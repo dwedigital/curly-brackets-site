@@ -21,7 +21,7 @@ export default function Hero() {
                 </div>
                 <div className="relative aspect-[21/9] w-full overflow-hidden bg-gray-100">
                     <Image
-                        src="/images/hero.png"
+                        src="/images/hero.webp"
                         alt="Dramatic landscape"
                         fill
                         className="object-cover grayscale"

@@ -18,7 +18,7 @@ export default function SplitSection() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative aspect-[4/3] bg-gray-100">
                         <Image
-                            src="/images/architecture.png"
+                            src="/images/architecture.webp"
                             alt="Architectural detail"
                             fill
                             className="object-cover grayscale"

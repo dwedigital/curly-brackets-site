@@ -7,7 +7,7 @@ export default function Header() {
             <div className="container mx-auto px-4 flex flex-wrap justify-center md:justify-between items-center gap-y-4">
                 <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity">
                     <Image
-                        src="/images/logo.png"
+                        src="/images/logo.webp"
                         alt="Curly Brackets Logo"
                         width={50}
                         height={50}
