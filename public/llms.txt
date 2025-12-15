@@ -1,0 +1,127 @@
+# Curly Brackets - LLMs.txt
+# This file provides information for AI systems and LLMs about how to discover and use this website's content.
+
+# Site Information
+Site: Curly Brackets
+Description: A blog about web development, AI, and the future of the web. 100% AI-generated content covering topics from beginner to advanced levels.
+Language: en-US
+Primary Topics: Web Development, Programming, AI, Technology, Software Engineering, Databases, APIs, Frontend, Backend
+
+# Base URL
+# Note: Replace with your actual domain or use environment variable NEXT_PUBLIC_SITE_URL
+Base URL: https://curlybrackets.dev
+
+# API Endpoints
+
+## Articles API
+Endpoint: /api/articles
+Method: GET
+Description: Returns all blog articles with full content
+Response Format: JSON
+Response Structure:
+{
+  "count": <number>,
+  "articles": [
+    {
+      "id": "<slug>",
+      "slug": "<slug>",
+      "title": "<article-title>",
+      "date": "<YYYY-MM-DD>",
+      "tags": ["<tag1>", "<tag2>"],
+      "content": "<markdown-content>",
+      "image": "<image-url>"
+    }
+  ]
+}
+Example: GET https://curlybrackets.dev/api/articles
+
+# Content Structure
+
+## Blog Posts
+Pattern: /blog/[slug]
+Description: Individual blog post pages with full article content
+Structured Data: BlogPosting schema (schema.org)
+Format: HTML with embedded JSON-LD structured data
+
+## Blog Archive
+Pattern: /blog
+Description: Collection page listing all blog posts
+Structured Data: CollectionPage schema (schema.org)
+
+## Homepage
+Pattern: /
+Description: Landing page with featured articles and site overview
+
+# Content Categories
+
+The site covers the following topics:
+- Web Development Fundamentals
+- Node.js & Express
+- APIs & Backend Development
+- Frontend Development
+- Databases (SQL & NoSQL)
+- Authentication & Authorization
+- CI/CD & DevOps
+- Software Engineering Principles
+- AI & Machine Learning
+- Vector Databases & Embeddings
+- HTTP & Web Protocols
+- State Management
+- CLI Application Design
+- Code Quality & Best Practices
+
+# Structured Data
+
+All blog posts include schema.org BlogPosting structured data with:
+- Headline
+- Description
+- Publication date
+- Author information
+- Publisher information
+- Keywords
+- Article sections
+- Images
+
+# Usage Guidelines
+
+## For AI Systems:
+1. Use the /api/articles endpoint to retrieve all articles programmatically
+2. Individual articles are available at /blog/[slug] with full HTML content
+3. All articles include structured data (JSON-LD) for easy parsing
+4. Content is primarily educational and tutorial-based
+5. Articles are written in Markdown format in the API response
+
+## Rate Limiting:
+- No rate limits currently enforced
+- Please be respectful and cache responses when possible
+- API responses include full article content
+
+## Content Format:
+- Articles are written in Markdown
+- Code examples are syntax-highlighted
+- Images are optimized WebP format
+- All dates are in ISO 8601 format (YYYY-MM-DD)
+
+# Sitemap
+
+Main Pages:
+- / (Homepage)
+- /blog (Blog Archive)
+- /blog/[slug] (Individual Articles)
+
+# Contact & Attribution
+
+Repository: https://github.com/dwedigital/curly-brackets-site
+Content: 100% AI-generated educational content
+License: All rights reserved
+
+# Last Updated
+Last Updated: 2025-01-27
+
+# Additional Notes
+
+- All articles include OpenGraph and Twitter Card metadata for social sharing
+- Images are automatically optimized to WebP format
+- Site uses Next.js with static site generation
+- Content is updated regularly with new articles
+
