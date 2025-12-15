@@ -40,25 +40,33 @@ The workflow file is located at `.github/workflows/optimize-images.yml`.
 
 This project uses GitHub Actions to deploy to Vercel, ensuring deployments only happen after image optimization completes. Follow these steps to set up:
 
-1. **Retrieve Vercel Credentials**:
+1. **Disable Automatic Deployments in Vercel** (Required):
+   
+   **Option A: Using `vercel.json` (Recommended)**:
+   - This project includes a `vercel.json` file that disables automatic deployments
+   - The configuration sets `deploymentEnabled.production: false` and `deploymentEnabled.preview: false`
+   - This prevents Vercel from deploying automatically and allows GitHub Actions to control deployments
+   - No additional action needed if using this file
+   
+   **Option B: Using Vercel Dashboard**:
+   - Go to your Vercel project dashboard
+   - Navigate to **Settings** → **Git**
+   - Under **Production Branch**, disable **"Automatically deploy every push to the Production Branch"**
+   - Save the settings
+
+2. **Retrieve Vercel Credentials**:
    - Get your [Vercel Access Token](https://vercel.com/account/tokens)
    - Install Vercel CLI: `npm install --global vercel@latest`
    - Run `vercel login` in your terminal
    - Navigate to your project directory and run `vercel link` to create/connect a Vercel project
    - In the generated `.vercel` folder, find `project.json` and note the `projectId` and `orgId`
 
-2. **Add GitHub Secrets**:
+3. **Add GitHub Secrets**:
    - Go to your GitHub repository → Settings → Secrets and variables → Actions
    - Add the following secrets:
      - `VERCEL_TOKEN`: Your Vercel access token
      - `VERCEL_ORG_ID`: The `orgId` from `.vercel/project.json`
      - `VERCEL_PROJECT_ID`: The `projectId` from `.vercel/project.json`
-
-3. **How It Works**:
-   - When you push image files to `main`, the "Optimize Images" workflow runs first
-   - After optimization completes successfully, the "Vercel Deployment" workflow automatically triggers
-   - The deployment workflow builds your app and deploys to Vercel production
-   - This ensures your deployment always includes optimized WebP images
 
 **Note**: The Vercel deployment workflow uses `vercel deploy --prebuilt` which builds locally and uploads only the build artifacts to Vercel, following the [Vercel GitHub Actions guide](https://vercel.com/kb/guide/how-can-i-use-github-actions-with-vercel).
 
@@ -102,6 +110,60 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project uses GitHub Actions to deploy to Vercel, ensuring that deployments only happen after image optimization completes. This approach gives you full control over your CI/CD pipeline.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Important: Disable Automatic Deployments
+
+**Before setting up**, you must disable Vercel's automatic production deployments. This project includes a `vercel.json` configuration file that handles this automatically:
+
+```json
+{
+  "git": {
+    "deploymentEnabled": {
+      "production": false,
+      "preview": false
+    }
+  }
+}
+```
+
+This configuration prevents Vercel from deploying automatically and allows GitHub Actions to control when deployments happen.
+
+**Alternative**: You can also disable automatic deployments via the Vercel dashboard:
+1. Go to your Vercel project dashboard
+2. Navigate to **Settings** → **Git**
+3. Under **Production Branch**, disable **"Automatically deploy every push to the Production Branch"**
+4. Save the settings
+
+### How Deployment Works
+
+The deployment process follows this sequence:
+
+1. **Push to main branch**:
+   - If you push image files (PNG, JPG, etc.), the "Optimize Images" workflow runs first
+   - If you push non-image files, deployment happens immediately
+
+2. **Image Optimization** (if images were pushed):
+   - Images are converted to WebP format
+   - Optimized images are committed back to the repository
+   - The "Optimize Images" workflow completes
+
+3. **Vercel Deployment**:
+   - The "Vercel Deployment" workflow automatically triggers after optimization completes
+   - The workflow builds your application using `vercel build`
+   - Build artifacts are deployed to Vercel production using `vercel deploy --prebuilt`
+   - This ensures your production site always includes optimized WebP images
+
+### Deployment Workflow Files
+
+- **Image Optimization**: `.github/workflows/optimize-images.yml`
+- **Vercel Deployment**: `.github/workflows/deploy-vercel.yml`
+
+### Benefits of This Approach
+
+- ✅ **Optimized images**: Production always includes WebP images
+- ✅ **Controlled deployments**: Deployments happen only after optimization completes
+- ✅ **Build artifacts**: Only build outputs are uploaded to Vercel (not source code)
+- ✅ **Consistent pipeline**: Same build process locally and in CI/CD
+
+For more details, see the [Vercel GitHub Actions guide](https://vercel.com/kb/guide/how-can-i-use-github-actions-with-vercel).
