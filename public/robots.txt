@@ -1,0 +1,11 @@
+# robots.txt for Curly Brackets
+# This file allows all search engines to crawl and index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+# Next.js automatically generates sitemap.xml at /sitemap.xml
+# Update the domain below if your site uses a different base URL
+Sitemap: https://curlybrackets.tech/sitemap.xml
+

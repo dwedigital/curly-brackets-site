@@ -99,6 +99,57 @@ This command will:
 
 **Note**: The cleanup command is useful for one-time cleanup when you already have both WebP and original versions of images.
 
+## Sitemap Generation
+
+This project includes automatic sitemap generation that keeps your sitemap up-to-date with all your blog posts.
+
+### How It Works
+
+The sitemap is automatically generated using Next.js's built-in sitemap feature:
+
+- **Location**: `src/app/sitemap.ts`
+- **Auto-regeneration**: The sitemap is regenerated on every build
+- **URL**: Available at `https://yourdomain.com/sitemap.xml`
+
+### What's Included
+
+The sitemap automatically includes:
+
+1. **Home page** (`/`) - Priority: 1.0, Change frequency: daily
+2. **Blog index** (`/blog`) - Priority: 0.9, Change frequency: daily
+3. **All blog posts** (`/blog/[slug]`) - Priority: 0.8, Change frequency: weekly
+   - Each post includes its publication date as `lastModified`
+   - Posts are automatically discovered from the `posts/` directory
+
+### Configuration
+
+The sitemap uses the base URL from:
+1. `NEXT_PUBLIC_SITE_URL` environment variable (if set)
+2. `VERCEL_URL` environment variable (on Vercel)
+3. Default: `https://curlybrackets.tech`
+
+To customize the base URL, set the `NEXT_PUBLIC_SITE_URL` environment variable in your deployment platform.
+
+### robots.txt Integration
+
+The `robots.txt` file (located in `public/robots.txt`) references the sitemap:
+
+```
+Sitemap: https://curlybrackets.tech/sitemap.xml
+```
+
+**Important**: Update the domain in `robots.txt` if your site uses a different base URL.
+
+### Keeping It Up-to-Date
+
+The sitemap stays current automatically:
+
+- ✅ **New blog posts**: Add a `.md` file to `posts/` and it's automatically included
+- ✅ **Updated posts**: Modify post dates and the sitemap reflects the changes
+- ✅ **Build-time generation**: Regenerates on every deployment
+
+No manual steps required! The sitemap is always in sync with your content.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
