@@ -13,7 +13,7 @@ export function getBaseUrl(): string {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  return 'https://curlybrackets.dev';
+  return 'https://curlybrackets.tech';
 }
 
 // Extract description from HTML content (first paragraph or first 160 chars)

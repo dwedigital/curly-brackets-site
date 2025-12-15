@@ -9,7 +9,7 @@ Primary Topics: Web Development, Programming, AI, Technology, Software Engineeri
 
 # Base URL
 # Note: Replace with your actual domain or use environment variable NEXT_PUBLIC_SITE_URL
-Base URL: https://curlybrackets.dev
+Base URL: https://curlybrackets.tech
 
 # API Endpoints
 
@@ -33,7 +33,7 @@ Response Structure:
     }
   ]
 }
-Example: GET https://curlybrackets.dev/api/articles
+Example: GET https://curlybrackets.tech/api/articles
 
 # Content Structure
 
