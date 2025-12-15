@@ -35,7 +35,7 @@ export default function Footer() {
                     </ul>
                 </div>
                 <div className="mt-24 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                    &copy; {new Date().getFullYear()} Curly Brackets. All rights reserved.
+                    &copy; {new Date().getFullYear()} Curly Brackets. All rights reserved - test.
                 </div>
             </div>
         </footer>
