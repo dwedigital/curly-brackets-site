@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Footer from '@/app/components/Footer';
 import PostNavigation from '@/app/components/PostNavigation';
 import Image from 'next/image';
+import { generateBlogPostingStructuredData, extractDescription, getBaseUrl } from '@/lib/structured-data';
 
 export async function generateStaticParams() {
     const paths = getAllPostIds();
@@ -15,8 +16,29 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const postData = await getPostData(slug);
+    const description = extractDescription(postData.contentHtml);
+    const baseUrl = getBaseUrl();
+    const imageUrl = postData.image 
+        ? `${baseUrl}${postData.image.startsWith('/') ? '' : '/'}${postData.image}`
+        : `${baseUrl}/images/logo.webp`;
+
     return {
         title: `${postData.title} | Curly Brackets`,
+        description: description,
+        openGraph: {
+            title: postData.title,
+            description: description,
+            images: [imageUrl],
+            type: 'article',
+            publishedTime: postData.date ? new Date(postData.date).toISOString() : undefined,
+            tags: postData.tags,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: postData.title,
+            description: description,
+            images: [imageUrl],
+        },
     };
 }
 
@@ -24,10 +46,16 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
     const { slug } = await params;
     const postData = await getPostData(slug);
     const adjacentPosts = getAdjacentPosts(slug);
+    const structuredData = generateBlogPostingStructuredData(postData);
 
     return (
-        <div className="min-h-screen flex flex-col bg-white text-black">
-            <Header />
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
+            <div className="min-h-screen flex flex-col bg-white text-black">
+                <Header />
             <main className="flex-grow">
                 {postData.image && (
                     <div className="relative w-full h-[40vh] mb-16 overflow-hidden bg-gray-100">
@@ -73,5 +101,6 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
             </main>
             <Footer />
         </div>
+        </>
     );
 }

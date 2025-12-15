@@ -2,6 +2,7 @@ import { getSortedPostsData } from '@/lib/markdown';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import FilteredPostGrid from '@/app/components/FilteredPostGrid';
+import { generateBlogCollectionStructuredData } from '@/lib/structured-data';
 
 export const metadata = {
     title: 'Blog | Curly Brackets',
@@ -10,10 +11,16 @@ export const metadata = {
 
 export default function BlogIndex() {
     const allPostsData = getSortedPostsData();
+    const structuredData = generateBlogCollectionStructuredData(allPostsData);
 
     return (
-        <div className="min-h-screen flex flex-col bg-white text-black">
-            <Header />
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
+            <div className="min-h-screen flex flex-col bg-white text-black">
+                <Header />
             <main className="flex-grow container mx-auto px-4 py-24">
                 <div className="max-w-4xl mx-auto text-center mb-24">
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8">
@@ -28,5 +35,6 @@ export default function BlogIndex() {
             </main>
             <Footer />
         </div>
+        </>
     );
 }
