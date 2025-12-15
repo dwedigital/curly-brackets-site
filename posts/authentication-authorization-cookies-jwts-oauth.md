@@ -1,6 +1,6 @@
 ---
-title: 'Authentication and Authorization Explained: Cookies, JWTs, Sessions, and OAuth in Practice'
-date: '2025-12-12'
+title: "Authentication and Authorization Explained: Cookies, JWTs, Sessions, and OAuth in Practice"
+date: "2025-12-12"
 tags: ['Web Development','Security','Backend']
 
 ---

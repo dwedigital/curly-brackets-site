@@ -1,5 +1,5 @@
 ---
-title: 'Vector Databases 101: A Junior Dev's Guide to Embeddings'
+title: "Vector Databases 101: A Junior Dev's Guide to Embeddings"
 date: '2025-12-15'
 tags: ['Databases','Machine Learning','Python']
 
