@@ -1,0 +1,50 @@
+name: Vercel Deployment
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  workflow_run:
+    workflows: ["Optimize Images"]
+    types:
+      - completed
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'public/**/*.png'
+      - 'public/**/*.jpg'
+      - 'public/**/*.jpeg'
+      - 'public/**/*.gif'
+
+jobs:
+  Deploy-Production:
+    # Only deploy if:
+    # 1. Optimization workflow completed successfully (workflow_run trigger), OR
+    # 2. Push to main that doesn't include image files (regular push)
+    if: |
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      (github.event_name == 'push' && !contains(github.event.head_commit.message, '🖼️ Auto-optimize images to WebP'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # When triggered by workflow_run, checkout the commit from the triggering workflow
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+          # Use the commit SHA from the triggering workflow
+          sha: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
