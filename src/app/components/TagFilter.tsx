@@ -8,12 +8,12 @@ interface TagFilterProps {
 
 export default function TagFilter({ tags, selectedTag, onSelectTag }: TagFilterProps) {
     return (
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
+        <div className="flex overflow-x-auto md:flex-wrap gap-2 md:justify-center mb-12 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide snap-x">
             <button
                 onClick={() => onSelectTag(null)}
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${selectedTag === null
-                        ? 'bg-black text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                className={`flex-none snap-start px-4 py-2 text-sm font-medium rounded-full transition-colors ${selectedTag === null
+                    ? 'bg-black text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
             >
                 All
@@ -22,9 +22,9 @@ export default function TagFilter({ tags, selectedTag, onSelectTag }: TagFilterP
                 <button
                     key={tag}
                     onClick={() => onSelectTag(tag)}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${selectedTag === tag
-                            ? 'bg-black text-white'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    className={`flex-none snap-start px-4 py-2 text-sm font-medium rounded-full transition-colors ${selectedTag === tag
+                        ? 'bg-black text-white'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                 >
                     {tag}
