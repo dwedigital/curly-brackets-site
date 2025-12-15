@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "optimize-images": "node scripts/optimize-images.js",
-    "predev": "npm run optimize-images",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

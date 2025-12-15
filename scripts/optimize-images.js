@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
@@ -16,6 +17,7 @@ const stats = {
     processed: 0,
     skipped: 0,
     errors: 0,
+    deleted: 0,
     totalSavedBytes: 0,
 };
 
@@ -55,10 +57,17 @@ async function optimizeImage(imagePath) {
         const baseName = path.basename(imagePath, ext);
         const webpPath = path.join(dir, `${baseName}.webp`);
 
-        // Skip if WebP version already exists
+        // If WebP version already exists, delete the original and skip conversion
         if (fs.existsSync(webpPath)) {
-            console.log(`⏭️  Skipped (already exists): ${path.relative(config.publicDir, webpPath)}`);
-            stats.skipped++;
+            try {
+                fs.unlinkSync(imagePath);
+                stats.deleted++;
+                stats.skipped++;
+                console.log(`⏭️  Skipped (WebP exists): ${path.relative(config.publicDir, webpPath)}`);
+                console.log(`   🗑️  Deleted duplicate: ${path.relative(config.publicDir, imagePath)}\n`);
+            } catch (error) {
+                console.error(`❌ Error deleting duplicate ${imagePath}:`, error.message);
+            }
             return;
         }
 
@@ -90,11 +99,16 @@ async function optimizeImage(imagePath) {
         const savedBytes = originalSize - newSize;
         const savedPercent = ((savedBytes / originalSize) * 100).toFixed(1);
 
+        // Delete original file after successful conversion
+        fs.unlinkSync(imagePath);
+        stats.deleted++;
+
         stats.totalSavedBytes += savedBytes;
         stats.processed++;
 
         console.log(`✅ Optimized: ${path.relative(config.publicDir, imagePath)}`);
         console.log(`   → ${path.relative(config.publicDir, webpPath)}`);
+        console.log(`   🗑️  Deleted original`);
         console.log(`   💾 Saved: ${formatBytes(savedBytes)} (${savedPercent}%)\n`);
 
     } catch (error) {
@@ -115,9 +129,60 @@ function formatBytes(bytes) {
 }
 
 /**
+ * Cleanup duplicate images (delete non-webp versions when webp exists)
+ */
+async function cleanupDuplicates() {
+    console.log('🧹 Cleanup Duplicate Images\n');
+    console.log(`📁 Scanning: ${config.publicDir}\n`);
+
+    // Find all non-webp images
+    const images = findImages(config.publicDir);
+    let deletedCount = 0;
+    let totalFreedBytes = 0;
+
+    for (const imagePath of images) {
+        const ext = path.extname(imagePath).toLowerCase();
+        const dir = path.dirname(imagePath);
+        const baseName = path.basename(imagePath, ext);
+        const webpPath = path.join(dir, `${baseName}.webp`);
+
+        // If webp version exists, delete the original
+        if (fs.existsSync(webpPath)) {
+            try {
+                const originalStats = fs.statSync(imagePath);
+                const originalSize = originalStats.size;
+                
+                fs.unlinkSync(imagePath);
+                deletedCount++;
+                totalFreedBytes += originalSize;
+                
+                console.log(`🗑️  Deleted: ${path.relative(config.publicDir, imagePath)}`);
+                console.log(`   (WebP exists: ${path.relative(config.publicDir, webpPath)})\n`);
+            } catch (error) {
+                console.error(`❌ Error deleting ${imagePath}:`, error.message);
+            }
+        }
+    }
+
+    // Print summary
+    console.log('━'.repeat(50));
+    console.log('📊 Cleanup Summary:');
+    console.log(`   🗑️  Deleted: ${deletedCount} duplicate files`);
+    console.log(`   💾 Space freed: ${formatBytes(totalFreedBytes)}`);
+    console.log('━'.repeat(50));
+}
+
+/**
  * Main function
  */
 async function main() {
+    // Check for cleanup flag
+    const args = process.argv.slice(2);
+    if (args.includes('--cleanup') || args.includes('-c')) {
+        await cleanupDuplicates();
+        return;
+    }
+
     console.log('🖼️  Image Optimization Script\n');
     console.log(`📁 Scanning: ${config.publicDir}`);
     console.log(`📐 Max width: ${config.maxWidth}px`);
@@ -142,6 +207,7 @@ async function main() {
     console.log('📊 Summary:');
     console.log(`   ✅ Processed: ${stats.processed}`);
     console.log(`   ⏭️  Skipped: ${stats.skipped}`);
+    console.log(`   🗑️  Deleted: ${stats.deleted}`);
     console.log(`   ❌ Errors: ${stats.errors}`);
     console.log(`   💾 Total saved: ${formatBytes(stats.totalSavedBytes)}`);
     console.log('━'.repeat(50));

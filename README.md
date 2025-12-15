@@ -20,6 +20,50 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Image Optimization
+
+This project includes automated image optimization that converts images to WebP format for better performance and smaller file sizes.
+
+### GitHub Action (Automated)
+
+A GitHub Action workflow automatically optimizes images when you push changes to the `main` branch. The workflow:
+
+- **Triggers**: Automatically runs when PNG, JPG, JPEG, or GIF files are pushed to `public/`
+- **Process**: Converts images to WebP format (max width: 1920px, quality: 85%)
+- **Auto-commit**: Commits the optimized WebP images back to the repository
+- **Manual trigger**: Can also be manually triggered from the GitHub Actions tab
+
+The workflow file is located at `.github/workflows/optimize-images.yml`.
+
+### Manual Commands
+
+You can also run image optimization manually using npm scripts:
+
+#### Optimize Images (Convert to WebP)
+```bash
+npm run optimize-images
+```
+
+This command will:
+- Scan the `public/` directory for images (PNG, JPG, JPEG, GIF)
+- Convert them to WebP format
+- Resize images wider than 1920px
+- **Automatically delete the original files** after successful conversion
+
+#### Cleanup Duplicate Images
+```bash
+npm run optimize-images -- --cleanup
+# or
+npm run optimize-images -- -c
+```
+
+This command will:
+- Find all non-WebP images that have a corresponding WebP version
+- Delete the duplicate original files
+- Free up disk space
+
+**Note**: The cleanup command is useful for one-time cleanup when you already have both WebP and original versions of images.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

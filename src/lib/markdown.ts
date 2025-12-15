@@ -41,8 +41,8 @@ export function getSortedPostsData(): PostData[] {
 
         // Check if a hero image exists for this post
         const imagesDirectory = path.join(process.cwd(), 'public/images/posts');
-        const imagePath = path.join(imagesDirectory, `${id}.png`);
-        const image = fs.existsSync(imagePath) ? `/images/posts/${id}.png` : null;
+        const imagePath = path.join(imagesDirectory, `${id}.webp`);
+        const image = fs.existsSync(imagePath) ? `/images/posts/${id}.webp` : null;
 
         // Combine the data with the id
         return {
@@ -95,8 +95,8 @@ export async function getPostData(id: string): Promise<PostData> {
 
     // Check if a hero image exists for this post
     const imagesDirectory = path.join(process.cwd(), 'public/images/posts');
-    const imagePath = path.join(imagesDirectory, `${id}.png`);
-    const image = fs.existsSync(imagePath) ? `/images/posts/${id}.png` : null;
+    const imagePath = path.join(imagesDirectory, `${id}.webp`);
+    const image = fs.existsSync(imagePath) ? `/images/posts/${id}.webp` : null;
 
     // Combine the data with the id, contentHtml, and image
     return {
