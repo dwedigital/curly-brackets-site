@@ -12,6 +12,10 @@
 
 [functions]
   node_bundler = "esbuild"
+  included_files = ["posts/**"]
+
+[functions.articles]
+  included_files = ["posts/**"]
 
 # API endpoint redirect - map /api/articles to Netlify Function
 [[redirects]]
