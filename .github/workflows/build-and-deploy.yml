@@ -61,22 +61,43 @@ jobs:
         if: steps.check-images.outputs.has_images == 'true'
         run: npm run optimize-images
         
-      - name: Check for WebP files before commit
+      - name: Check changes before commit
         if: steps.check-images.outputs.has_images == 'true'
         run: |
-          echo "Checking for WebP files..."
+          echo "Checking for changes..."
+          echo "New WebP files:"
           find public -name "*.webp" -type f 2>/dev/null | head -10 || echo "No WebP files found"
-          echo "Git status before commit:"
+          echo ""
+          echo "Git status (showing all changes including deletions):"
           git status --short || true
+          echo ""
+          echo "Deleted files:"
+          git status --short | grep '^ D' || echo "No deletions"
         
-      - name: Commit optimized images
+      - name: Commit optimized images and deletions
         if: steps.check-images.outputs.has_images == 'true'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "🖼️ Auto-optimize images to WebP"
-          file_pattern: 'public/**/*.webp'
-          commit_options: '--no-verify'
-          skip_dirty_check: true
+        run: |
+          # Configure git
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Stage all changes in public directory (including deletions)
+          git add -A public/
+          
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          
+          echo "Changes to be committed:"
+          git status --short
+          
+          # Commit the changes
+          git commit -m "🖼️ Auto-optimize images to WebP" --no-verify || exit 0
+          
+          # Push the commit
+          git push || echo "Push failed or no changes to push"
 
   deploy:
     name: Deploy to Netlify
