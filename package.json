@@ -5,7 +5,9 @@
   "scripts": {
     "optimize-images": "node scripts/optimize-images.js",
     "dev": "next dev",
+    "dev:netlify": "netlify dev",
     "build": "next build",
+    "build:static": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -25,6 +27,7 @@
     "remark-rehype": "^11.1.2"
   },
   "devDependencies": {
+    "@netlify/functions": "^2.8.2",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",

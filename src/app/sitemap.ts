@@ -15,6 +15,10 @@ import { getBaseUrl } from '@/lib/structured-data';
  * 
  * Next.js will serve this at: https://yourdomain.com/sitemap.xml
  */
+
+// Required for static export - forces this route to be statically generated
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();
   const allPosts = getSortedPostsData();

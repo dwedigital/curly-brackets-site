@@ -4,10 +4,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Required for API routes when using static export
-export const dynamic = 'force-dynamic';
-
+// This API route works in development mode
+// In production (static export), the Netlify Function at /.netlify/functions/articles is used
 export async function GET() {
+
     try {
         // Get all posts metadata
         const allPosts = getSortedPostsData();
@@ -41,3 +41,4 @@ export async function GET() {
         );
     }
 }
+
