@@ -6,8 +6,9 @@
     "optimize-images": "node scripts/optimize-images.js",
     "dev": "next dev",
     "dev:netlify": "netlify dev",
-    "build": "next build",
-    "build:static": "NODE_ENV=production next build",
+    "prebuild": "node scripts/pre-build.js",
+    "build": "NODE_ENV=production next build",
+    "postbuild": "node scripts/post-build.js",
     "start": "next start",
     "lint": "eslint"
   },
