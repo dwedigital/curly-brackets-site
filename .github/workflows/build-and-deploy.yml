@@ -11,9 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     # Skip if this is the auto-commit from image optimization
     if: contains(github.event.head_commit.message, '🖼️ Auto-optimize images to WebP') == false
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
         
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,11 +31,20 @@ jobs:
       - name: Optimize images
         run: npm run optimize-images
         
+      - name: Check for WebP files before commit
+        run: |
+          echo "Checking for WebP files..."
+          find public -name "*.webp" -type f | head -10 || echo "No WebP files found"
+          echo "Git status before commit:"
+          git status --short || true
+        
       - name: Commit optimized images
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "🖼️ Auto-optimize images to WebP"
           file_pattern: 'public/**/*.webp'
+          commit_options: '--no-verify'
+          skip_dirty_check: true
 
   deploy:
     name: Deploy to Netlify
@@ -42,13 +56,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Get latest commit (in case optimize-images committed changes)
+          # Always checkout the latest from the branch (includes WebP commits from optimize-images)
           ref: ${{ github.ref }}
           fetch-depth: 0
 
+      - name: Wait for optimize-images commit (if any)
+        # Give a moment for the optimize-images commit to be available
+        run: |
+          echo "Waiting for any pending commits..."
+          sleep 5
+          git fetch origin ${{ github.ref_name }} || true
+
       - name: Pull latest changes
-        # Ensure we have the latest commit in case optimize-images committed changes
-        run: git pull origin ${{ github.ref_name }} || true
+        # Ensure we have the latest commit including any WebP files from optimize-images
+        run: |
+          git pull origin ${{ github.ref_name }} || true
+          echo "Latest commit: $(git log -1 --oneline)"
+          echo "Checking for WebP images:"
+          ls -la public/images/posts/*.webp 2>/dev/null | head -5 || echo "No WebP images found yet"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
