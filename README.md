@@ -26,15 +26,19 @@ This project includes automated image optimization that converts images to WebP 
 
 ### GitHub Action (Automated)
 
-A GitHub Action workflow automatically optimizes images when you push changes to the `main` branch. The workflow:
+A single GitHub Action workflow handles both image optimization and Vercel deployment in sequence:
 
-- **Triggers**: Automatically runs when PNG, JPG, JPEG, or GIF files are pushed to `public/`
-- **Process**: Converts images to WebP format (max width: 1920px, quality: 85%)
-- **Auto-commit**: Commits the optimized WebP images back to the repository
-- **Manual trigger**: Can also be manually triggered from the GitHub Actions tab
-- **Vercel Integration**: Vercel deployment waits for image optimization to complete before deploying
+- **Triggers**: Automatically runs on push to `main` branch or can be manually triggered
+- **Image Optimization**: 
+  - Converts PNG, JPG, JPEG, or GIF files to WebP format (max width: 1920px, quality: 85%)
+  - Auto-commits optimized images back to the repository
+  - Skips if no image files are present or if triggered by its own auto-commit
+- **Vercel Deployment**: 
+  - Runs after image optimization completes
+  - Builds and deploys to Vercel production
+  - Always runs (even if image optimization was skipped)
 
-The workflow file is located at `.github/workflows/optimize-images.yml`.
+The workflow file is located at `.github/workflows/build-and-deploy.yml`.
 
 #### Vercel Deployment Setup
 
@@ -191,24 +195,26 @@ This configuration prevents Vercel from deploying automatically and allows GitHu
 The deployment process follows this sequence:
 
 1. **Push to main branch**:
-   - If you push image files (PNG, JPG, etc.), the "Optimize Images" workflow runs first
-   - If you push non-image files, deployment happens immediately
+   - Triggers the "Build and Deploy" workflow
 
-2. **Image Optimization** (if images were pushed):
-   - Images are converted to WebP format
-   - Optimized images are committed back to the repository
-   - The "Optimize Images" workflow completes
+2. **Image Optimization** (first job):
+   - If image files (PNG, JPG, etc.) were pushed, they are converted to WebP format
+   - Optimized images are automatically committed back to the repository
+   - If no images were pushed, this job is skipped
 
-3. **Vercel Deployment**:
-   - The "Vercel Deployment" workflow automatically triggers after optimization completes
-   - The workflow builds your application using `vercel build`
-   - Build artifacts are deployed to Vercel production using `vercel deploy --prebuilt`
+3. **Vercel Deployment** (second job):
+   - Runs after image optimization completes (or is skipped)
+   - Pulls the latest changes (including any optimized images)
+   - Builds your application using `vercel build`
+   - Deploys build artifacts to Vercel production using `vercel deploy --prebuilt`
    - This ensures your production site always includes optimized WebP images
 
-### Deployment Workflow Files
+### Workflow File
 
-- **Image Optimization**: `.github/workflows/optimize-images.yml`
-- **Vercel Deployment**: `.github/workflows/deploy-vercel.yml`
+- **Combined Workflow**: `.github/workflows/build-and-deploy.yml`
+  - Handles both image optimization and deployment in a single workflow
+  - Ensures deployment always happens after image optimization completes
+  - No complex coordination between separate workflows needed
 
 ### Benefits of This Approach
 
