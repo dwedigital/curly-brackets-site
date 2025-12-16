@@ -26,15 +26,20 @@ This project includes automated image optimization that converts images to WebP 
 
 ### GitHub Action (Automated)
 
-A GitHub Action workflow automatically optimizes images when you push changes to the `main` branch:
+A GitHub Action workflow handles both image optimization and Netlify deployment in sequence:
 
-- **Triggers**: Automatically runs when PNG, JPG, JPEG, or GIF files are pushed to `public/`
-- **Process**: Converts images to WebP format (max width: 1920px, quality: 85%)
-- **Auto-commit**: Commits the optimized WebP images back to the repository
-- **Manual trigger**: Can also be manually triggered from the GitHub Actions tab
-- **Skip condition**: Skips if triggered by its own auto-commit (prevents infinite loops)
+- **Triggers**: Automatically runs on push to `main` branch or can be manually triggered
+- **Image Optimization**: 
+  - Converts PNG, JPG, JPEG, or GIF files to WebP format (max width: 1920px, quality: 85%)
+  - Auto-commits optimized images back to the repository
+  - Skips if no image files are present or if triggered by its own auto-commit
+- **Netlify Deployment**: 
+  - Runs after image optimization completes
+  - Builds the Next.js application
+  - Deploys to Netlify production
+  - Always runs (even if image optimization was skipped)
 
-The workflow file is located at `.github/workflows/optimize-images.yml`.
+The workflow file is located at `.github/workflows/build-and-deploy.yml`.
 
 ### Manual Commands
 
@@ -64,6 +69,77 @@ This command will:
 - Free up disk space
 
 **Note**: The cleanup command is useful for one-time cleanup when you already have both WebP and original versions of images.
+
+## Netlify Deployment
+
+This project uses GitHub Actions to deploy to Netlify, ensuring deployments only happen after image optimization completes.
+
+### Setup Instructions
+
+1. **Create a Netlify Site**:
+   - Go to [Netlify](https://app.netlify.com) and sign in
+   - Click "Add new site" → "Import an existing project"
+   - Connect your GitHub repository
+   - **Important**: Do NOT enable automatic deployments in Netlify (we'll handle deployments via GitHub Actions)
+
+2. **Disable Automatic Deployments in Netlify**:
+   - In your Netlify site dashboard, go to **Deploys** tab
+   - Click the **"Stop auto publishing"** button (this locks deploys)
+   - This prevents Netlify from automatically publishing new builds
+   - Builds will still occur, but they won't be published until you manually release them or GitHub Actions deploys
+   - This allows GitHub Actions to control when deployments happen
+   
+   **Alternative method** (if you want to stop builds entirely):
+   - Go to **Site settings** → **Build & deploy** → **Continuous deployment**
+   - Under **Build settings**, toggle **Build status** to **Stopped builds**
+   - This prevents Netlify from building at all (GitHub Actions will handle everything)
+
+3. **Get Netlify Credentials**:
+   - Go to [Netlify User Settings](https://app.netlify.com/user/applications) → **Applications** → **New access token**
+   - Create a new access token and copy it
+   - In your Netlify site dashboard, go to **Site settings** → **General**
+   - Copy your **Site ID** (found under "Site details")
+
+4. **Add GitHub Secrets**:
+   - Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**
+   - Add the following secrets:
+     - `NETLIFY_AUTH_TOKEN`: Your Netlify access token
+     - `NETLIFY_SITE_ID`: Your Netlify site ID
+
+### How Deployment Works
+
+The deployment process follows this sequence:
+
+1. **Push to main branch**:
+   - Triggers the "Build and Deploy" workflow
+
+2. **Image Optimization** (first job):
+   - If image files (PNG, JPG, etc.) were pushed, they are converted to WebP format
+   - Optimized images are automatically committed back to the repository
+   - If no images were pushed, this job is skipped
+
+3. **Netlify Deployment** (second job):
+   - Runs after image optimization completes (or is skipped)
+   - Pulls the latest changes (including any optimized images)
+   - Builds your Next.js application using `npm run build`
+   - Deploys the `out` directory to Netlify production
+   - This ensures your production site always includes optimized WebP images
+
+### Configuration
+
+The project includes a `netlify.toml` file that configures:
+- Build command: `npm run build`
+- Publish directory: `out` (Next.js static export)
+- Redirects for client-side routing
+- Security headers
+- Cache headers for static assets
+
+### Benefits of This Approach
+
+- ✅ **Optimized images**: Production always includes WebP images
+- ✅ **Controlled deployments**: Deployments happen only after optimization completes
+- ✅ **Sequential workflow**: Image optimization always completes before deployment
+- ✅ **No race conditions**: Single workflow ensures proper ordering
 
 ## Sitemap Generation
 
