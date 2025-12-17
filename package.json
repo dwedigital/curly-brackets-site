@@ -16,15 +16,18 @@
     "cl": "^0.0.1",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
+    "katex": "^0.16.27",
     "lucide-react": "^0.556.0",
     "next": "16.0.8",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "rehype-highlight": "^7.0.2",
+    "rehype-katex": "^7.0.1",
     "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
+    "remark-math": "^6.0.0",
     "remark-rehype": "^11.1.2"
   },
   "devDependencies": {
