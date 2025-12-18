@@ -23,10 +23,10 @@ jobs:
     # Only run if [deploy] or [publish] is in commit message
     # Skip if this is the auto-commit from image optimization
     if: |
-      (contains(github.event.head_commit.message, '[deploy]') || 
-       contains(github.event.head_commit.message, '[publish]') ||
-       github.event_name == 'workflow_dispatch') &&
-      contains(github.event.head_commit.message, '🖼️ Auto-optimize images to WebP') == false
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event.head_commit.message != null && contains(github.event.head_commit.message, '[deploy]')) || 
+       (github.event.head_commit.message != null && contains(github.event.head_commit.message, '[publish]'))) &&
+      (github.event.head_commit.message == null || contains(github.event.head_commit.message, '🖼️ Auto-optimize images to WebP') == false)
     permissions:
       contents: write
     steps:
@@ -106,24 +106,28 @@ jobs:
     # Only deploy if commit message contains [deploy] or [publish]
     # This allows you to control when deployments happen
     # Example: "Add new post [deploy]" or "Update content [publish]"
+    # Also supports manual trigger via workflow_dispatch
     if: |
       always() && 
-      (contains(github.event.head_commit.message, '[deploy]') || 
-       contains(github.event.head_commit.message, '[publish]') ||
-       github.event_name == 'workflow_dispatch')
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event.head_commit.message != null && contains(github.event.head_commit.message, '[deploy]')) || 
+       (github.event.head_commit.message != null && contains(github.event.head_commit.message, '[publish]')))
     steps:
       - name: Check deployment trigger
         run: |
           echo "Deployment triggered by:"
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
-          if echo "$COMMIT_MSG" | grep -q '\[deploy\]'; then
-            echo "  ✓ Commit message contains [deploy]"
-          elif echo "$COMMIT_MSG" | grep -q '\[publish\]'; then
-            echo "  ✓ Commit message contains [publish]"
-          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "  ✓ Manual workflow dispatch"
+            echo "Commit message: (manual trigger - no commit message)"
+          else
+            COMMIT_MSG="${{ github.event.head_commit.message }}"
+            if echo "$COMMIT_MSG" | grep -q '\[deploy\]'; then
+              echo "  ✓ Commit message contains [deploy]"
+            elif echo "$COMMIT_MSG" | grep -q '\[publish\]'; then
+              echo "  ✓ Commit message contains [publish]"
+            fi
+            echo "Commit message: $COMMIT_MSG"
           fi
-          echo "Commit message: $COMMIT_MSG"
       
       - name: Checkout repository
         uses: actions/checkout@v4

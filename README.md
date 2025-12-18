@@ -28,7 +28,9 @@ This project includes automated image optimization that converts images to WebP 
 
 A GitHub Action workflow handles both image optimization and Netlify deployment in sequence:
 
-- **Triggers**: Automatically runs on push to `main` branch or can be manually triggered
+- **Triggers**: 
+  - Automatically runs on push to `main` branch when commit message contains `[deploy]` or `[publish]`
+  - Can be manually triggered from the GitHub Actions tab (see below)
 - **Image Optimization**: 
   - Converts PNG, JPG, JPEG, or GIF files to WebP format (max width: 1920px, quality: 85%)
   - Auto-commits optimized images back to the repository
@@ -40,6 +42,22 @@ A GitHub Action workflow handles both image optimization and Netlify deployment 
   - Always runs (even if image optimization was skipped)
 
 The workflow file is located at `.github/workflows/build-and-deploy.yml`.
+
+#### Manual Trigger
+
+You can manually trigger the workflow from GitHub:
+
+1. Go to your repository on GitHub
+2. Click on the **Actions** tab
+3. Select **Build and Deploy** from the workflow list
+4. Click **Run workflow** button (top right)
+5. Select the branch (usually `main`) and click **Run workflow**
+
+This is useful when you want to:
+- Deploy without making a commit
+- Re-run a failed deployment
+- Test the deployment process
+- Trigger a deployment after making changes outside of the monitored paths
 
 ### Manual Commands
 
@@ -110,13 +128,15 @@ This project uses GitHub Actions to deploy to Netlify, ensuring deployments only
 
 The deployment process follows this sequence:
 
-1. **Push to main branch**:
-   - Triggers the "Build and Deploy" workflow
+1. **Trigger** (one of the following):
+   - Push to `main` branch with commit message containing `[deploy]` or `[publish]`
+   - Manual trigger from GitHub Actions UI
 
 2. **Image Optimization** (first job):
    - If image files (PNG, JPG, etc.) were pushed, they are converted to WebP format
    - Optimized images are automatically committed back to the repository
    - If no images were pushed, this job is skipped
+   - When manually triggered, checks all images in the repository
 
 3. **Netlify Deployment** (second job):
    - Runs after image optimization completes (or is skipped)
@@ -124,6 +144,12 @@ The deployment process follows this sequence:
    - Builds your Next.js application using `npm run build`
    - Deploys the `out` directory to Netlify production
    - This ensures your production site always includes optimized WebP images
+
+**Note**: To trigger automatic deployment on push, include `[deploy]` or `[publish]` in your commit message. For example:
+- `git commit -m "Add new blog post [deploy]"`
+- `git commit -m "Update content [publish]"`
+
+If you don't include these tags, the workflow will still optimize images but won't deploy to Netlify (unless manually triggered).
 
 ### Configuration
 
