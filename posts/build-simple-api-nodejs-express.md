@@ -1,7 +1,7 @@
 ---
 title: 'Build a Simple API with Node.js and Express: A Starter Guide'
 date: '2025-12-11'
-tags: ['Node.js','Express','API']
+tags: ['Node.js', 'API', 'Tutorial']
 
 ---
 If you are starting your journey into backend development, Node.js paired with Express is one of the best combinations to learn. Node.js allows you to run JavaScript outside of the browser, and Express is a minimal framework that makes building web servers and APIs significantly easier.

@@ -1,7 +1,7 @@
 ---
 title: "Demystifying Python Decorators: A Guide for Developers"
 date: "2025-12-17"
-tags: ['Python','Software Engineering','Clean Code']
+tags: ['Python', 'Best Practices', 'Tutorial']
 
 ---
 If you have spent any time reading modern Python frameworks like Flask or Django, you have likely encountered the `@` symbol sitting atop function definitions. These are **decorators**, a powerful feature that allows you to modify the behavior of a function or class without permanently changing its source code.

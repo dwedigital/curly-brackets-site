@@ -1,7 +1,7 @@
 ---
 title: "Ruby for Automation: Building Small Microservices and Self-Contained CLI Tools"
 date: "2025-12-18"
-tags: ['Ruby','Automation','DevOps']
+tags: ['Ruby', 'Automation', 'DevOps', 'CLI']
 
 ---
 While Python often dominates the conversation around automation and scripting in the DevOps world, Ruby remains a powerhouse for developers who value developer happiness, expressive syntax, and robust tooling. 

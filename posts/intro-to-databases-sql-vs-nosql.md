@@ -1,7 +1,7 @@
 ---
 title: 'Intro to databases: SQL vs NoSQL for junior developers'
 date: '2025-12-12'
-tags: ['Databases','SQL','NoSQL']
+tags: ['Databases', 'SQL', 'Beginner Guide']
 
 ---
 As a junior developer, you will eventually face the inevitable question when starting a new project: **"Where do we put the data?"**

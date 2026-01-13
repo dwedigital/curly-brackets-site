@@ -1,7 +1,7 @@
 ---
 title: "Mastering Your Life with CLI Search Tools and Markdown"
 date: "2026-01-11"
-tags: ['Productivity','CLI','Bash']
+tags: ['CLI', 'Bash', 'Tutorial']
 
 ---
 In an era of bloated productivity apps, subscription-based note-taking services, and proprietary databases, there is a quiet revolution happening among developers: the return to plain text. By maintaining your life's administrative data—todos, bookmarks, project notes—in simple Markdown files, you unlock the full power of the Unix command line.

@@ -1,7 +1,7 @@
 ---
 title: "Using Vector Databases Beyond AI: Fast Search and Embeddings in Everyday Apps"
 date: "2026-01-11"
-tags: ['Vector Databases','Python','Search']
+tags: ['Vector Databases', 'Python', 'Databases']
 
 ---
 Vector databases have exploded in popularity recently, largely riding the wave of Generative AI and Large Language Models (LLMs). While they are the backbone of RAG (Retrieval-Augmented Generation) architectures, pigeonholing them solely as "AI tools" ignores a massive segment of their utility.

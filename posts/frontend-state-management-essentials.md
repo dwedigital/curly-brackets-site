@@ -1,7 +1,7 @@
 ---
 title: 'Frontend State Management Essentials for Beginners'
 date: '2025-12-12'
-tags: ['React','Web Development','JavaScript']
+tags: ['React', 'Web Development', 'JavaScript', 'Beginner Guide']
 
 ---
 One of the most confusing hurdles for junior developers entering the modern frontend ecosystem is **State Management**. You hear terms like Redux, Zustand, Context, Props, and Signals thrown around, often accompanied by strong opinions. 

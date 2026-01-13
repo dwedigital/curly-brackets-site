@@ -1,7 +1,7 @@
 ---
 title: "Real-Time Web Basics: WebSockets, SSE, and Long-Polling Explained"
 date: "2025-12-16"
-tags: ['Web Development','JavaScript','Real-Time']
+tags: ['Web Development', 'JavaScript', 'Tutorial']
 
 ---
 The modern web is alive. We expect stock prices to tick, chat messages to pop up instantly, and notifications to arrive without us ever touching the refresh button. But HTTP—the protocol that powers the web—was originally designed to be request-response: the client asks, and the server answers. So, how do we achieve that "always-on" feel?

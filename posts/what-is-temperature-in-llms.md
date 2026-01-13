@@ -1,7 +1,7 @@
 ---
 title: "What is Temperature in LLMs? A Deep Dive for Developers"
 date: "2025-12-18"
-tags: ['Machine Learning','LLM']
+tags: ['Machine Learning', 'AI', 'Tutorial']
 
 ---
 If you have ever tweaked settings in the OpenAI playground or adjusted parameters for an API call to Llama 2 or GPT-4, you have likely encountered the **Temperature** setting. While it is often explained simply as a "creativity slider," the underlying mechanics are rooted in probability theory and linear algebra.

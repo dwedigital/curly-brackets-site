@@ -1,7 +1,7 @@
 ---
 title: "Edge-First Backends: Deploying Lightweight Functions to the Edge with JavaScript, Python, and Go"
 date: "2026-01-07"
-tags: ['Edge Computing','Serverless','Backend Architecture']
+tags: ['Edge Computing', 'Serverless', 'JavaScript', 'Python', 'Go', 'Backend', 'Architecture']
 
 ---
 For the past decade, "serverless" meant running functions in a centralized cloud region (like `us-east-1`). While this abstracted infrastructure management, it didn't solve the physics problem: light travels at a finite speed. If your user is in Tokyo and your lambda is in Virginia, latency is inevitable.

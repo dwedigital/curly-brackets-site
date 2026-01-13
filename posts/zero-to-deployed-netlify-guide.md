@@ -1,7 +1,7 @@
 ---
 title: "Zero to Deployed: A Comprehensive Guide to Netlify"
 date: "2025-12-16"
-tags: ['DevOps','Web Development','Netlify']
+tags: ['DevOps', 'Web Development', 'Serverless', 'Tutorial']
 
 ---
 In the earlier days of web development, deploying a site often meant wrestling with FTP clients, manually configuring servers, or dealing with complex CI/CD pipelines just to get a simple HTML file online. Then came Netlify.

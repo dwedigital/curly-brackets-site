@@ -1,7 +1,7 @@
 ---
 title: "AI-Augmented ETL: Designing Agentic Data Pipelines Across Languages"
 date: "2025-12-22"
-tags: ['Data Engineering','AI','Go']
+tags: ['Data Engineering', 'AI', 'Go', 'Python', 'Architecture']
 
 ---
 Traditional Extract, Transform, Load (ETL) pipelines are rigid. They rely on strict schemas, regular expressions, and hard-coded logic. If the input data format changes slightly or requires semantic understanding (like extracting sentiment from a review or summarizing a chaotic PDF), traditional pipelines break. 

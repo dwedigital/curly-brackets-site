@@ -1,7 +1,7 @@
 ---
 title: "Edge Computing with JavaScript: Deploying Functions at the Edge"
 date: "2025-12-16"
-tags: ['JavaScript','Edge Computing','Web Performance']
+tags: ['JavaScript', 'Edge Computing', 'Performance', 'Tutorial']
 
 ---
 For decades, the standard model of web deployment has been centralized: you spin up a server (or a cluster) in a specific region (e.g., `us-east-1`), and every user in the world connects to that single point. While Content Delivery Networks (CDNs) solved the problem for static assets like images and CSS, dynamic logic was strictly server-bound.

@@ -1,7 +1,7 @@
 ---
 title: "Build an Offline CLI Assistant with a Tiny LLM and Local Embeddings"
 date: "2026-01-13"
-tags: ['Python','LLM','RAG']
+tags: ['Python', 'AI', 'CLI', 'Tutorial']
 
 ---
 In an era of massive cloud models, there is something incredibly satisfying about running your own AI stack entirely on your local machine. No API keys, no monthly bills, and complete privacy.

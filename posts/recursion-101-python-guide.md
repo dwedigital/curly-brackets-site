@@ -1,7 +1,7 @@
 ---
 title: "Recursion 101: Understanding the Loopless Loop"
 date: "2025-12-15"
-tags: ['Python','Computer Science','Algorithms']
+tags: ['Python', 'Beginner Guide', 'Tutorial']
 
 ---
 To understand recursion, you must first understand recursion.

@@ -1,7 +1,7 @@
 ---
 title: "How to Design Great CLI Apps with Python"
 date: "2025-12-15"
-tags: ['Python','CLI','Open Source']
+tags: ['Python', 'CLI', 'Best Practices', 'Tutorial']
 
 ---
 Command Line Interfaces (CLIs) are the bread and butter of developer efficiency. While Graphical User Interfaces (GUIs) are great for end-users, CLIs are often faster and more scriptable for developers. However, writing a CLI isn't just about parsing arguments; it's about creating a tool that is intuitive, helpful, and pleasant to use.

@@ -1,7 +1,7 @@
 ---
 title: "Python Data Orchestration Without Heavy Schedulers: Lightweight Alternatives You Can Build Today"
 date: "2025-12-23"
-tags: ['Python','Data Engineering','Orchestration']
+tags: ['Python', 'Data Engineering', 'Backend', 'Tutorial']
 
 ---
 In the modern data engineering landscape, tools like Apache Airflow, Prefect, or Dagster have become the gold standard for orchestration. They offer robust UIs, complex retry logic, and distributed execution. But for many small-to-mid-sized projects, they also bring massive overhead: separate web servers, scheduler processes, metadata databases, and steep learning curves.

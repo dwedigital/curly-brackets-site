@@ -1,7 +1,7 @@
 ---
 title: 'Database Indexing and Query Optimization for Beginners'
 date: '2025-12-15'
-tags: ['Databases','SQL','Performance']
+tags: ['Databases', 'SQL', 'Performance', 'Beginner Guide']
 
 ---
 As a junior developer, few things feel as satisfying as writing a feature that works. However, as your application grows, you might notice that a page load that used to take 200ms now takes 5 seconds. Usually, the culprit is the database.

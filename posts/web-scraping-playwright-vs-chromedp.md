@@ -1,7 +1,7 @@
 ---
 title: "Web Scraping in the Modern Web: When to Use Headless Browsers vs Lightweight Scrapers"
 date: "2025-12-19"
-tags: ['Web Scraping','Playwright','Go']
+tags: ['Go', 'Python', 'Automation', 'Testing']
 
 ---
 The era of simple `GET` requests and HTML parsing is largely behind us. Modern web applications are built on complex frameworks like React, Vue, and Angular, relying heavily on client-side JavaScript to render content. This shift has forced developers to evolve their scraping strategies from simple HTTP clients to sophisticated browser automation tools.

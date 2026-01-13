@@ -1,7 +1,7 @@
 ---
 title: "CLI Tooling Showdown: Go vs Python vs Node for Building Command-Line Interfaces"
 date: "2025-12-16"
-tags: ['CLI','DevOps','Software Architecture']
+tags: ['CLI', 'Go', 'Python', 'Node.js', 'Architecture']
 
 ---
 Every developer eventually needs to build a Command-Line Interface (CLI). Whether it is for automating deployment pipelines, parsing logs, or scaffolding projects, the tool you choose to build your CLI defines its performance, maintainability, and ease of distribution.

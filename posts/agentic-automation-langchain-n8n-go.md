@@ -1,7 +1,7 @@
 ---
 title: "Agentic Automation in Practice: Building AI-Augmented Pipelines with LangChain, n8n, and Go"
 date: "2025-12-18"
-tags: ['AI Agents','n8n','Go']
+tags: ['AI', 'Automation', 'Go', 'Architecture']
 
 ---
 The era of rigid, linear automation is evolving. While traditional scripts function like a train on a track—efficient but unable to deviate—**Agentic Automation** introduces an all-terrain vehicle. It enables systems to reason, plan, and adapt to unexpected data or vague objectives. 

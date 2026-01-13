@@ -1,7 +1,7 @@
 ---
 title: "Python Async IO Masterclass: Writing Reliable, Scalable Async Web Services"
 date: "2025-12-16"
-tags: ['Python','Asyncio','Backend']
+tags: ['Python', 'Backend', 'Performance', 'Tutorial']
 
 ---
 Python's `asyncio` library has evolved from an experimental feature to the backbone of high-performance modern Python web frameworks like FastAPI and Sanic. However, transitioning from synchronous to asynchronous programming requires a shift in mental models. 

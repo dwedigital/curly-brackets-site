@@ -8,29 +8,36 @@
 const fs = require('fs');
 const path = require('path');
 
-const apiRoutePath = path.join(process.cwd(), 'src/app/api/articles');
-const apiRouteFile = path.join(apiRoutePath, 'route.ts');
+const apiRoutes = [
+  'src/app/api/articles/route.ts',
+  'src/app/api/tags/route.ts',
+];
 
 console.log('Restoring API routes for development...');
 
-// Restore API route from git if it was removed
-if (!fs.existsSync(apiRouteFile)) {
-  console.log('Restoring API route from git...');
-  // Create directory if it doesn't exist
-  if (!fs.existsSync(apiRoutePath)) {
-    fs.mkdirSync(apiRoutePath, { recursive: true });
+const { execSync } = require('child_process');
+
+for (const routeFile of apiRoutes) {
+  const fullPath = path.join(process.cwd(), routeFile);
+  const dirPath = path.dirname(fullPath);
+
+  if (!fs.existsSync(fullPath)) {
+    console.log(`Restoring ${routeFile}...`);
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+
+    // Restore the file using git
+    try {
+      execSync(`git checkout HEAD -- ${routeFile}`, { stdio: 'inherit' });
+      console.log(`✓ ${routeFile} restored`);
+    } catch (error) {
+      console.log(`⚠ Could not restore ${routeFile} from git (this is OK if file is new)`);
+    }
+  } else {
+    console.log(`✓ ${routeFile} already exists`);
   }
-  
-  // Restore the file using git
-  const { execSync } = require('child_process');
-  try {
-    execSync(`git checkout HEAD -- ${apiRouteFile}`, { stdio: 'inherit' });
-    console.log('✓ API route restored');
-  } catch (error) {
-    console.log('⚠ Could not restore API route from git (this is OK if file is new)');
-  }
-} else {
-  console.log('✓ API route already exists');
 }
 
 console.log('✓ Post-build complete');

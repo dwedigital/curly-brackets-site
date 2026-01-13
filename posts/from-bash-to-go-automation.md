@@ -1,7 +1,7 @@
 ---
 title: "From Bash to Go: Replacing Shell Automation with Safer, Faster Go Scripts"
 date: "2025-12-17"
-tags: ['Go','DevOps','Scripting']
+tags: ['Go', 'Bash', 'DevOps', 'Automation', 'Tutorial']
 
 ---
 We have all been there. What starts as a simple three-line Bash script to back up a database eventually grows into a 500-line monstrosity. It has brittle variable expansion, inconsistent error handling, and relies on a specific version of `sed` that is only installed on one legacy server.

@@ -1,7 +1,7 @@
 ---
 title: "MCPs versus APIs: The Blueprint for AI Connectivity"
 date: "2025-12-15"
-tags: ['AI','Software Architecture','MCP']
+tags: ['AI', 'Architecture', 'API']
 
 ---
 As a junior developer, you are likely already familiar with APIs (Application Programming Interfaces). They are the glue that holds the modern internet together, allowing your frontend to talk to your backend, or your app to talk to Stripe and Google Maps.

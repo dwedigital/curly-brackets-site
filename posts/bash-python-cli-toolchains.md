@@ -1,7 +1,7 @@
 ---
 title: "Bash + Python: Designing Robust CLI Toolchains for Automation"
 date: "2026-01-10"
-tags: ['DevOps','Python','Bash']
+tags: ['DevOps', 'Python', 'Bash', 'Architecture', 'Tutorial']
 
 ---
 In the world of DevOps and Site Reliability Engineering, there is an eternal debate: "Should I write this in Bash or Python?" The answer is often "Yes."

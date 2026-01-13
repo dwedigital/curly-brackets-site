@@ -1,7 +1,7 @@
 ---
 title: 'CI/CD for Web Apps: A Practical Starter Guide for Beginners'
 date: '2025-12-12'
-tags: ['DevOps','GitHub Actions','Web Development']
+tags: ['DevOps', 'GitHub Actions', 'Web Development', 'Beginner Guide']
 
 ---
 As a junior developer, you have likely heard the term "CI/CD" thrown around in job descriptions and team meetings. It sounds like high-level DevOps wizardry, but at its core, it is simply about automating the boring parts of software development so you can focus on coding.

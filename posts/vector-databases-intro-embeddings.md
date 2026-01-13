@@ -1,7 +1,7 @@
 ---
 title: "Vector Databases 101: A Junior Dev's Guide to Embeddings"
 date: '2025-12-15'
-tags: ['Databases','Machine Learning','Python']
+tags: ['Vector Databases', 'Machine Learning', 'Python', 'Beginner Guide']
 
 ---
 As a junior developer, you are likely comfortable with relational databases like PostgreSQL or MySQL. You know how to structure tables, define foreign keys, and write SQL queries to find exact matches. But with the explosion of Artificial Intelligence (AI) and Large Language Models (LLMs), a new type of data storage has taken center stage: the **Vector Database**.
