@@ -1,5 +1,37 @@
 # CLAUDE.md - Curly Brackets Project Guide
 
+## Quick Reference
+
+```bash
+npm run dev          # Local dev server (port 3000)
+npm run dev:netlify  # Full Netlify environment (port 8888) - RECOMMENDED
+npm run build        # Production build (static export to /out)
+npm run lint         # Check code quality
+npm run optimize-images  # Convert images to WebP
+```
+
+## Critical Rules
+
+1. **API Sync Required**: Always update BOTH files when modifying APIs:
+   - `src/app/api/*/route.ts` (development)
+   - `netlify/functions/*.ts` (production)
+
+2. **Don't manually edit `posts/`**: Content is managed by n8n workflow - manual edits will be overwritten on next n8n run
+
+3. **No test suite**: Verify changes manually:
+   - Run `npm run dev` and check the browser
+   - Run `npm run build` to ensure static export works
+   - Run `npm run lint` for code quality
+
+4. **Deploy flag required**: Include `[deploy]` in commit message to trigger deployment
+   - Without flag: commit is saved but site is NOT rebuilt
+   - With flag: triggers image optimization → build → deploy
+
+5. **Images must be WebP**: Place in `public/images/posts/{slug}.webp`
+   - If adding PNG/JPG, run `npm run optimize-images` or let CI handle it
+
+---
+
 ## Project Overview
 
 Curly Brackets is a modern tech blog built with **Next.js 16**, **React 19**, and **TypeScript 5**. It uses static site generation (SSG) with Netlify deployment and serverless functions for API endpoints.
