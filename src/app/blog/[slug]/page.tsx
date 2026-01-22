@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const postData = await getPostData(slug);
     const description = extractDescription(postData.contentHtml);
     const baseUrl = getBaseUrl();
-    const imageUrl = postData.image 
+    const imageUrl = postData.image
         ? `${baseUrl}${postData.image.startsWith('/') ? '' : '/'}${postData.image}`
         : `${baseUrl}/images/logo.webp`;
 
@@ -56,51 +56,51 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
             />
             <div className="min-h-screen flex flex-col bg-white text-black">
                 <Header />
-            <main className="flex-grow">
-                {postData.image && (
-                    <div className="relative w-full h-[40vh] mb-16 overflow-hidden bg-gray-100">
-                        <Image
-                            src={postData.image}
-                            alt={postData.title}
-                            fill
-                            className="object-cover grayscale"
-                            priority
-                        />
-                    </div>
-                )}
-
-                <article className="container mx-auto px-4 max-w-4xl mb-8">
-                    <header className="mb-16 text-center">
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight">
-                            {postData.title}
-                        </h1>
-                        <div className="flex flex-col items-center gap-4">
-                            <div className="text-lg text-gray-500 font-medium uppercase tracking-widest">
-                                {postData.date}
-                            </div>
-                            {postData.tags && postData.tags.length > 0 && (
-                                <div className="flex gap-2">
-                                    {postData.tags.map((tag) => (
-                                        <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wider rounded-full">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
+                <main className="flex-grow">
+                    {postData.image && (
+                        <div className="relative w-full h-[40vh] mb-16 overflow-hidden bg-gray-100">
+                            <Image
+                                src={postData.image}
+                                alt={postData.title}
+                                fill
+                                className="object-cover grayscale"
+                                priority
+                            />
                         </div>
-                    </header>
+                    )}
 
-                    {!postData.image && <div className="w-full h-px bg-gray-200 mb-16"></div>}
+                    <article className="container mx-auto px-4 max-w-4xl mb-8">
+                        <header className="mb-16 text-center">
+                            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight">
+                                {postData.title}
+                            </h1>
+                            <div className="flex flex-col items-center gap-4">
+                                <div className="text-lg text-gray-500 font-medium uppercase tracking-widest">
+                                    {postData.date}
+                                </div>
+                                {postData.tags && postData.tags.length > 0 && (
+                                    <div className="flex gap-2">
+                                        {postData.tags.map((tag) => (
+                                            <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wider rounded-full">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </header>
 
-                    <div
-                        className="prose prose-xl prose-neutral mx-auto prose-headings:font-bold prose-headings:tracking-tight prose-a:bg-black prose-a:text-white prose-a:px-1 prose-a:py-0.5 prose-a:no-underline hover:prose-a:bg-gray-800 transition-colors"
-                        dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }}
-                    />
-                </article>
-                <PostNavigation previous={adjacentPosts.previous} next={adjacentPosts.next} />
-            </main>
-            <Footer />
-        </div>
+                        {!postData.image && <div className="w-full h-px bg-gray-200 mb-16"></div>}
+
+                        <div
+                            className="prose prose-xl prose-neutral mx-auto prose-headings:font-bold prose-headings:tracking-tight prose-a:bg-black prose-a:text-white prose-a:px-1 prose-a:py-0.5 prose-a:no-underline hover:prose-a:bg-gray-800 transition-colors"
+                            dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }}
+                        />
+                    </article>
+                    <PostNavigation previous={adjacentPosts.previous} next={adjacentPosts.next} />
+                </main>
+                <Footer />
+            </div>
         </>
     );
 }
